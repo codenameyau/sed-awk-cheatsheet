@@ -1,0 +1,71 @@
+#####################################################################
+# PROJECT FILES
+#####################################################################
+data/
+
+
+#####################################################################
+# SECRET FILES
+#####################################################################
+
+
+
+#####################################################################
+# JAVASCRIPT SPECIFIC
+#####################################################################
+
+# PACKAGE MANAGEMENT
+node_modules/
+bower_components/
+
+# TEST COVERAGE
+lib-cov
+coverage
+
+# BUILD TOOLS
+[gG]ulpfile.js
+[gG]runtfile.js
+.grunt
+
+# CONFIGURATION
+.lock-wscript
+
+# BINARY
+build/Release
+
+
+#####################################################################
+# MISCELLANEOUS FILES
+#####################################################################
+
+# DISTRIBUTION (feel free to uncomment)
+build
+dist
+
+# DATABASE
+*.sqlite*
+
+# TEMP / CACHE
+temp
+.sass-cache
+.cache
+*.spec
+*.tmp
+*~
+
+# RUNTIME DATA
+pids
+*.pid
+*.seed
+
+# LOGS
+[Ll]og*
+*.log
+
+# OS CRUFT
+.DS_Store
+thumbs.db
+._*
+
+# DEVOPS
+.vagrant

@@ -6,8 +6,17 @@ Once you've got the skills, it's time to up your game with real-life data found
 in the `/data` folder. May the Tux be with you.
 
 ```bash
+# Unzip data.
+zip data.zip data/
+
+# Zip data.
+zip -r data.zip data/
+
 # Preview the files.
 head data/names.csv && tail data/names.csv
+
+# Preview csv columns.
+sed -n 1p data/colleges.csv | tr ',' '\n'
 
 # Count the number of lines.
 wc data/names -l
@@ -23,7 +32,10 @@ cat text/table.txt | sed 1d | awk '{ print $2 }'
 # Sum the columns in the table.
 cat text/table.txt | sed 1d | awk '{ sum += $2 } END { print sum }'
 
-# Delete blank lines.
+# Kills all processes by name.
+ps aux | grep chrome | awk '{ print $2 }' | kill
+
+# Delete all blank lines from file.
 sed '/^$/d' filename
 ```
 
