@@ -1,0 +1,11 @@
+1. Linux - Sysadmin, Scripting etc.
+2. Databases - Oracle, mySQL etc.
+3. Hardware
+4. Security (Firewall, Network, Online Security etc)
+5. Storage
+6. Cool gadgets and websites
+7. Productivity (Too many technologies to explore, not much time available)
+8. Website Design
+9. Software Development
+10. Windows - Sysadmin, reboot etc.
+11. Linux - Sed tricks.
