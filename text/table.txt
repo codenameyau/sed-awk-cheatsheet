@@ -1,0 +1,4 @@
+rank    length  text
+1       36      How quickly daft jumping zebras vex.
+2       38      Jackdaws love my big sphinx of quartz.
+3       44      The quick brown fox jumps over the lazy dog.

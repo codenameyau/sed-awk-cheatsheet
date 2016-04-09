@@ -1,0 +1,3 @@
+/usr/kbos/bin:/usr/local/bin:/usr/jbin:/usr/bin:/usr/sas/bin
+/usr/local/sbin:/sbin:/bin/:/usr/sbin:/usr/bin:/opt/omni/bin:
+/opt/omni/lbin:/opt/omni/sbin:/root/bin
