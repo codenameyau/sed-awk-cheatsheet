@@ -1,7 +1,12 @@
 #!/bin/bash
 
 #####################################################################
-# PRINTING
+# PRINTING (p)
+# http://www.thegeekstuff.com/2009/09/unix-sed-tutorial-printing-file-lines-using-address-and-patterns/
+#
+# Syntax:
+# sed -n 'ADDRESS'p filename
+# sed -n '/PATTERN/p' filename
 #####################################################################
 
 # Print contents of a file.
@@ -37,4 +42,20 @@ sed -n '/Website/,$p' text/geek.txt
 sed -n '/Sysadmin/,+3p' text/geek.txt
 
 # Prints the lines matching the between the two patterns.
-sed -n '/Hardware/Website/p' text/geek.txt
+sed -n '/Hardware/,/Website/p' text/geek.txt
+
+
+#####################################################################
+# DELETION (d)
+# http://www.thegeekstuff.com/2009/09/unix-sed-tutorial-delete-file-lines-using-address-and-patterns/
+#
+# Syntax:
+# sed 'ADDRESS'd filename
+# sed /PATTERN/d filename
+#####################################################################
+
+# Deletes the nth line from the file.
+sed 3d text/geek.txt
+
+# Delete every lines starting from 3 and skipping by 2.
+sed 3~2d text/geek.txt
