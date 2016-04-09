@@ -55,7 +55,16 @@ sed -n '/Hardware/,/Website/p' text/geek.txt
 #####################################################################
 
 # Deletes the nth line from the file.
-sed 3d text/geek.txt
+sed '3d' text/geek.txt
 
 # Delete every lines starting from 3 and skipping by 2.
-sed 3~2d text/geek.txt
+sed '3~2d' text/geek.txt
+
+# Delete lines from 3 to 5.
+sed '3,5d' text/geek.txt
+
+# Delete the last line.
+sed '$d' text/geek.txt
+
+# Delete lines matching the pattern.
+sed '/Sysadmin/d' text/geek.txt
