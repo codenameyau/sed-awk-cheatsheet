@@ -82,11 +82,12 @@ sed '/Sysadmin/d' text/geek.txt
 # '/' can be replaced with any character (;@|-*~) as a delimiter.
 #
 # Flags:
-# g - replace all instances of REGEX with REPLACEMENT
-# n - replace the nth instance
-# p - print line if a substituion was made
-# i - case-insensitive substituion
-# w - write to file if a substituion was made
+# -g - replace all instances of REGEX with REPLACEMENT
+# -n - replace the nth instance
+# -p - print line if a substituion was made
+# -i - case-insensitive substituion
+# -r - extended regex (preferred)
+# -w - write to file if a substituion was made
 #####################################################################
 
 # Simple substituion for the first result.
@@ -103,12 +104,44 @@ sed -n 's/Linux/Unix/gp' text/geek.txt > text/geek-sub.txt
 
 # Replace parens with square brackets.
 sed 's/(/[/g; s/)/]/g' text/geek.txt
+sed -r 's/\((.+)\)/\[\1\]/g' text/geek.txt
 
-# Replace the inside of parens with empty string.
+# Capture group for substituion.
+sed 's/\(Linux\).\+/\1/g' text/geek.txt
+sed -r 's/(Linux).+/\1/g' text/geek.txt
+
+# Remove parenthesis and everything inside.
 sed 's/(.\+)//g' text/geek.txt
+sed -r 's/\(.+\)//g' text/geek.txt
 
-# Delete the last 3 characters.
+# Remove only the parenthesis.
+sed 's/(\(.\+\))/\1/g' text/geek.txt
+sed -r 's/\((.+)\)/\1/g' text/geek.txt
+
+# Replace everything inside parenthesis with YOLO.
+sed -r 's/\(.+\)/\(YOLO\)/g' text/geek.txt
+
+# Remove the last 3 characters.
 sed 's/.\{3\}$//g' text/geek.txt
+sed -r 's/.{3}$//g' text/geek.txt
+
+# Remove the last word.
+sed -r 's/\d$//g' text/geek.txt
+
+# Remove all letters.
+sed -r 's/[a-zA-Z]//g' text/geek.txt
+
+# Remove number lists.
+sed -r 's/[0-9](\. )?//g' text/geek.txt
+
+# Remove all alphanumeric characters.
+sed -r 's/\w//g' text/geek.txt
 
 # Removes html tags.
 sed 's/<[^>]*>//g' text/html.txt
+
+# Replace value with parenthesis value.
+sed 's/ .\+(\(.\+\))/ \1/g' text/geek.txt
+
+# Commatize numbers.
+sed '' text/numbers.txt

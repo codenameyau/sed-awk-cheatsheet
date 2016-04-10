@@ -1,2 +1,0 @@
-1. Unix - Sysadmin, Scripting etc.
-11. Unix - Sed tricks.  
