@@ -1,3 +1,0 @@
-/usr/jorge/bin:/usr/local/bin:/usr/jbin:/usr/bin:/usr/sas/bin
-/usr/local/sbin:/sbin:/bin/:/usr/sbin:/usr/bin:/opt/johnson/bin:
-/opt/johnson/lbin:/opt/johnson/sbin:/root/bin

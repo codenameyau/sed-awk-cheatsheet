@@ -68,3 +68,47 @@ sed '$d' text/geek.txt
 
 # Delete lines matching the pattern.
 sed '/Sysadmin/d' text/geek.txt
+
+
+#####################################################################
+# SUBSTITUTION (s)
+# http://www.thegeekstuff.com/2009/09/unix-sed-tutorial-replace-text-inside-a-file-using-substitute-command/
+#
+# Syntax:
+# sed 'ADDRESSs/REGEX/REPLACEMENT/FLAGS' filename
+# sed 'PATTERNs/REGEX/REPLACEMENT/FLAGS' filename
+#
+# Delimiter:
+# '/' can be replaced with any character (;@|-*~) as a delimiter.
+#
+# Flags:
+# g - replace all instances of REGEX with REPLACEMENT
+# n - replace the nth instance
+# p - print line if a substituion was made
+# i - case-insensitive substituion
+# w - write to file if a substituion was made
+#####################################################################
+
+# Simple substituion for the first result.
+sed 's/Linux/Unix/' text/geek.txt
+
+# Simple substituion for global instances.
+sed 's/Linux/Unix/g' text/geek.txt
+
+# Replace nth instance.
+sed 's/Linux/Unix/2' text/geek.txt
+
+# Write matched lines to output.
+sed -n 's/Linux/Unix/gp' text/geek.txt > text/geek-sub.txt
+
+# Replace parens with square brackets.
+sed 's/(/[/g; s/)/]/g' text/geek.txt
+
+# Replace the inside of parens with empty string.
+sed 's/(.\+)//g' text/geek.txt
+
+# Delete the last 3 characters.
+sed 's/.\{3\}$//g' text/geek.txt
+
+# Removes html tags.
+sed 's/<[^>]*>//g' text/html.txt

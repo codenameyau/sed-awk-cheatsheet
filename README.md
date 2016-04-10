@@ -7,7 +7,7 @@ in the `/data` folder. May the Tux be with you.
 
 ```bash
 # Unzip data.
-zip data.zip data/
+unzip data.zip
 
 # Zip data.
 zip -r data.zip data/
@@ -19,7 +19,7 @@ head data/names.csv && tail data/names.csv
 sed -n 1p data/colleges.csv | tr ',' '\n'
 
 # Count the number of lines.
-wc data/names -l
+wc -l data/*
 ```
 
 
@@ -35,7 +35,10 @@ cat text/table.txt | sed 1d | awk '{ sum += $2 } END { print sum }'
 # Kills all processes by name.
 ps aux | grep chrome | awk '{ print $2 }' | kill
 
-# Delete all blank lines from file.
+# Deletes trailing whitespace.
+sed 's/\s\+$//g' filename
+
+# Deletes all blank lines from file.
 sed '/^$/d' filename
 ```
 
