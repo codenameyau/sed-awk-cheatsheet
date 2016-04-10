@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# Description:
+# Examples of basic sed usage with the files in '/text'
 
 #####################################################################
 # PRINTING (p)
@@ -49,7 +52,7 @@ sed -n '/Hardware/,/Website/p' text/geek.txt
 # DELETION (d)
 # http://www.thegeekstuff.com/2009/09/unix-sed-tutorial-delete-file-lines-using-address-and-patterns/
 #
-# Syntax:
+# Syntax (same as print):
 # sed 'ADDRESS'd filename
 # sed /PATTERN/d filename
 #####################################################################
@@ -143,5 +146,10 @@ sed 's/<[^>]*>//g' text/html.txt
 # Replace value with parenthesis value.
 sed 's/ .\+(\(.\+\))/ \1/g' text/geek.txt
 
-# Commatize numbers.
-sed '' text/numbers.txt
+# Commatize numbers below 7 digits.
+sed -r 's/([0-9]+)([0-9]{3}$)/\1,\2/g' text/numbers.txt
+
+# Commatize numbers 7 digits and above.
+sed -r 's/([0-9]*)([0-9]{3})+([0-9]{3}$)/\1,\2,\3/g' text/numbers.txt
+
+# Commatize any number (WIP).
