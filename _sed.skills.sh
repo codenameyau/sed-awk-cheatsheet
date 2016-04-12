@@ -150,5 +150,6 @@ sed 's/ .\+(\(.\+\))/ \1/g' text/geek.txt
 sed -r 's/([0-9]+)([0-9]{3}$)/\1,\2/g' text/numbers.txt
 sed -r 's/([0-9]*)([0-9]{3})+([0-9]{3}$)/\1,\2,\3/g' text/numbers.txt
 
-# Commatize any number.
+# Commatize any number. Example with labels and loops
+# http://shallowsky.com/blog/linux/cmdline/sed-insert-commas.html
 sed ':a;s/\B[0-9]\{3\}\>/,&/;ta' text/numbers.txt

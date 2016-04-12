@@ -116,4 +116,8 @@ sed -n '/Sysadmin/,+3p' text/geek.txt
 
 # Prints the lines matching the between the two patterns.
 sed -n '/Hardware/,/Website/p' text/geek.txt
+
+# Execute multiple sed commands.
+sed -n -e '3p' -e '7p' text/geek.txt
+sed -n '3p; 7p' text/geek.txt
 ```
