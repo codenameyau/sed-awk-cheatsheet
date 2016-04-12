@@ -3,14 +3,14 @@
 # Description:
 # Examples of basic sed usage with the files in '/text'
 
-#####################################################################
+#-===================================================================
 # PRINTING (p)
 # http://www.thegeekstuff.com/2009/09/unix-sed-tutorial-printing-file-lines-using-address-and-patterns/
 #
 # Syntax:
 # sed -n 'ADDRESS'p filename
 # sed -n '/PATTERN/p' filename
-#####################################################################
+#-===================================================================
 
 # Print contents of a file.
 sed -n '/fox/p' text/*
@@ -48,14 +48,14 @@ sed -n '/Sysadmin/,+3p' text/geek.txt
 sed -n '/Hardware/,/Website/p' text/geek.txt
 
 
-#####################################################################
+#-===================================================================
 # DELETION (d)
 # http://www.thegeekstuff.com/2009/09/unix-sed-tutorial-delete-file-lines-using-address-and-patterns/
 #
 # Syntax (same as print):
 # sed 'ADDRESS'd filename
 # sed /PATTERN/d filename
-#####################################################################
+#-===================================================================
 
 # Deletes the nth line from the file.
 sed '3d' text/geek.txt
@@ -73,7 +73,7 @@ sed '$d' text/geek.txt
 sed '/Sysadmin/d' text/geek.txt
 
 
-#####################################################################
+#-===================================================================
 # SUBSTITUTION (s)
 # http://www.thegeekstuff.com/2009/09/unix-sed-tutorial-replace-text-inside-a-file-using-substitute-command/
 #
@@ -91,7 +91,7 @@ sed '/Sysadmin/d' text/geek.txt
 # -i - case-insensitive substituion
 # -r - extended regex (preferred)
 # -w - write to file if a substituion was made
-#####################################################################
+#-===================================================================
 
 # Simple substituion for the first result.
 sed 's/Linux/Unix/' text/geek.txt
@@ -146,10 +146,9 @@ sed 's/<[^>]*>//g' text/html.txt
 # Replace value with parenthesis value.
 sed 's/ .\+(\(.\+\))/ \1/g' text/geek.txt
 
-# Commatize numbers below 7 digits.
+# Commatize some numbers. Incorrect attempts.
 sed -r 's/([0-9]+)([0-9]{3}$)/\1,\2/g' text/numbers.txt
-
-# Commatize numbers 7 digits and above.
 sed -r 's/([0-9]*)([0-9]{3})+([0-9]{3}$)/\1,\2,\3/g' text/numbers.txt
 
-# Commatize any number (WIP).
+# Commatize any number.
+sed ':a;s/\B[0-9]\{3\}\>/,&/;ta' text/numbers.txt
