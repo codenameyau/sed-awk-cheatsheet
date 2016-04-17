@@ -80,7 +80,7 @@ sed '/Sysadmin/d' text/geek.txt
 #
 # Syntax:
 # sed 'ADDRESSs/REGEX/REPLACEMENT/FLAGS' filename
-# sed 'PATTERNs/REGEX/REPLACEMENT/FLAGS' filename
+# sed '/PATTERN/s/REGEX/REPLACEMENT/FLAGS' filename
 #
 # Delimiter:
 # '/' can be replaced with any character (;@|-*~) as a delimiter.
@@ -162,7 +162,7 @@ sed ':a;s/\B[0-9]\{3\}\>/,&/;ta' text/numbers.txt
 #
 # Syntax:
 # sed 'ADDRESSa TEXT' filename
-# sed 'PATTERNa TEXT' filename
+# sed '/PATTERN/a TEXT' filename
 #-===================================================================
 
 # Append examples.
@@ -176,3 +176,25 @@ sed '1i this will be inserted before line 1' text/geek.txt
 # Replace examples.
 sed '1c HAS BEEN REPLACED' text/geek.txt
 sed -r '/[wW]indows/c HAS BEEN HAXed' text/geek.txt
+
+
+#-===================================================================
+# PRINT LINE NUMBER
+# http://www.thegeekstuff.com/2009/11/unix-sed-tutorial-append-insert-replace-and-count-file-lines/
+#
+# Syntax:
+# sed '=' filename
+# sed '/PATTERN/=' filename
+#-===================================================================
+
+# Prints the line number for all lines in the file.
+sed -n '=' filename
+
+# Prints the line number that matches the pattern.
+sed -n '/Linux/=' filename
+
+# Prints the line number in range of two patterns (inclusive).
+sed -n '/Linux/,/Hardware/=' filename
+
+# Prints the total number of lines.
+sed -n '$=' filename
