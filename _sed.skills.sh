@@ -1,10 +1,14 @@
 #!/bin/bash
 #
 # Description:
-# Examples of basic sed usage with the files in '/text'
+# Sed examples with the files in 'text/'
+#
+# Tutorials:
+# - http://www.grymoire.com/Unix/Sed.html
+# - http://www.thegeekstuff.com/tag/sed-tips-and-tricks/
 
 #-===================================================================
-# PRINTING (p)
+# PRINT (p)
 # http://www.thegeekstuff.com/2009/09/unix-sed-tutorial-printing-file-lines-using-address-and-patterns/
 #
 # Syntax:
@@ -50,7 +54,29 @@ sed -n '/Hardware/,/Website/p' text/geek.txt
 
 
 #-===================================================================
-# DELETION (d)
+# PRINT LINE NUMBER
+# http://www.thegeekstuff.com/2009/11/unix-sed-tutorial-append-insert-replace-and-count-file-lines/
+#
+# Syntax:
+# sed '=' filename
+# sed '/PATTERN/=' filename
+#-===================================================================
+
+# Prints the line number for all lines in the file.
+sed -n '=' filename
+
+# Prints the line number that matches the pattern.
+sed -n '/Linux/=' filename
+
+# Prints the line number in range of two patterns (inclusive).
+sed -n '/Linux/,/Hardware/=' filename
+
+# Prints the total number of lines.
+sed -n '$=' filename
+
+
+#-===================================================================
+# DELETE (d)
 # http://www.thegeekstuff.com/2009/09/unix-sed-tutorial-delete-file-lines-using-address-and-patterns/
 #
 # Syntax (same as print):
@@ -75,7 +101,7 @@ sed '/Sysadmin/d' text/geek.txt
 
 
 #-===================================================================
-# SUBSTITUTION (s)
+# SUBSTITUTE (s)
 # http://www.thegeekstuff.com/2009/09/unix-sed-tutorial-replace-text-inside-a-file-using-substitute-command/
 #
 # Syntax:
@@ -179,22 +205,18 @@ sed -r '/[wW]indows/c HAS BEEN HAXed' text/geek.txt
 
 
 #-===================================================================
-# PRINT LINE NUMBER
-# http://www.thegeekstuff.com/2009/11/unix-sed-tutorial-append-insert-replace-and-count-file-lines/
+# MULTI-LINE OPERATIONS
+# http://www.thegeekstuff.com/2009/11/unix-sed-tutorial-multi-line-file-operation-with-6-practical-examples/
 #
-# Syntax:
-# sed '=' filename
-# sed '/PATTERN/=' filename
+# sed operates line-by-line, so if you need multi-line operations
+# for tasks such as detecting duplicate consecutive lines.
 #-===================================================================
 
-# Prints the line number for all lines in the file.
-sed -n '=' filename
-
-# Prints the line number that matches the pattern.
-sed -n '/Linux/=' filename
-
-# Prints the line number in range of two patterns (inclusive).
-sed -n '/Linux/,/Hardware/=' filename
-
-# Prints the total number of lines.
-sed -n '$=' filename
+# Detect duplicate lines and replace the newline with ' @ '.
+# - The curly braces are used to group sed commands.
+# - Begin by reading the first line and puts it in N.
+# - Then reads the next line separated by a new line (\n) and appends it to N.
+# - Lastly perform the substitution.
+sed -e '{N
+s/\n/ @ /
+}' text/duplicate-geek.txt

@@ -1,6 +1,9 @@
 # sed-awk
 
-Follow the tutorials here: http://www.thegeekstuff.com/tag/sed-tips-and-tricks/
+Follow the tutorials here:
+- http://www.thegeekstuff.com/tag/sed-tips-and-tricks/
+- http://www.grymoire.com/Unix/Sed.html
+- http://www.grymoire.com/Unix/Awk.html
 
 Once you've got the skills, it's time to up your game with real-life data found
 in the `/data` folder. May the Tux be with you.
