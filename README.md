@@ -88,6 +88,12 @@ sed 's/\s\+$//g' filename
 # Deletes all blank lines from file.
 sed '/^$/d' filename
 
+# Append a new line at the end of every file.
+sed '1a \n' *
+
+# Insert 'use strict' to the top of every js file.
+sed "1i 'use strict';" *.js
+
 # Generate random numbers and then sort.
 for i in {1..20}; do echo $(($RANDOM * 777 * $i)); done | sort -n
 ```

@@ -11,6 +11,7 @@
 # sed -n 'ADDRESS'p filename
 # sed -n '/PATTERN/p' filename
 #-===================================================================
+exit
 
 # Print contents of a file.
 sed -n '/fox/p' text/*
@@ -153,3 +154,25 @@ sed -r 's/([0-9]*)([0-9]{3})+([0-9]{3}$)/\1,\2,\3/g' text/numbers.txt
 # Commatize any number. Example with labels and loops
 # http://shallowsky.com/blog/linux/cmdline/sed-insert-commas.html
 sed ':a;s/\B[0-9]\{3\}\>/,&/;ta' text/numbers.txt
+
+
+#-===================================================================
+# APPEND (a), INSERT (i), REPLACE (c)
+# http://www.thegeekstuff.com/2009/11/unix-sed-tutorial-append-insert-replace-and-count-file-lines/
+#
+# Syntax:
+# sed 'ADDRESSa TEXT' filename
+# sed 'PATTERNa TEXT' filename
+#-===================================================================
+
+# Append examples.
+sed '1a hello world' text/geek.txt
+sed '/Linux/a TUX' text/geek.txt
+sed '$a this is the last line' text/geek.txt
+
+# Insert examples.
+sed '1i this will be inserted before line 1' text/geek.txt
+
+# Replace examples.
+sed '1c HAS BEEN REPLACED' text/geek.txt
+sed -r '/[wW]indows/c HAS BEEN HAXed' text/geek.txt
