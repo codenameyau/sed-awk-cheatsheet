@@ -91,42 +91,15 @@ sed 's/\s\+$//g' filename
 # Deletes all blank lines from file.
 sed '/^$/d' filename
 
-# Append a new line at the end of every file.
-sed '1a \n' *
-
 # Insert 'use strict' to the top of every js file.
 sed "1i 'use strict';" *.js
 
+# Append a new line at the end of every file.
+sed '1a \n' *
+
 # Generate random numbers and then sort.
 for i in {1..20}; do echo $(($RANDOM * 777 * $i)); done | sort -n
-```
 
-
-### Sed Print and Delete Commands
-
-```bash
-# Print line 2.
-sed -n 2p text/geek.txt
-
-# Delete follows a similar syntax as print but without the `-n` flag.
-sed 2d text/geek.txt
-
-# Print lines `2` to `5`.
-sed -n '2,5'p text/geek.txt
-
-# Print lines `2` to the last line.
-sed -n '2,$'p text/geek.txt
-
-# Print lines starting with `3` and skipping by `2`.
-sed -n '3~2'p text/geek.txt
-
-# Prints the line matching the pattern and the next '3' lines.
-sed -n '/Sysadmin/,+3p' text/geek.txt
-
-# Prints the lines matching the between the two patterns.
-sed -n '/Hardware/,/Website/p' text/geek.txt
-
-# Execute multiple sed commands.
-sed -n -e '3p' -e '7p' text/geek.txt
-sed -n '3p; 7p' text/geek.txt
+# Commatize numbers.
+sed -r ':loop; s/(.*[0-9])([0-9]{3})/\1,\2/; t loop' text/numbers.txt
 ```
