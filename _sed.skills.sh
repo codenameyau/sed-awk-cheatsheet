@@ -12,7 +12,7 @@
 # http://www.thegeekstuff.com/2009/09/unix-sed-tutorial-printing-file-lines-using-address-and-patterns/
 #
 # Syntax:
-# sed -n 'ADDRESS'p filename
+# sed -n 'ADDRESSp' filename
 # sed -n '/PATTERN/p' filename
 #-===================================================================
 exit
@@ -22,19 +22,22 @@ sed -n '/fox/p' text/*
 sed -n '/Sysadmin/p' text/geek.txt
 
 # Print a specific line `N`.
-sed -n '3'p text/geek.txt
+sed -n '3p' text/geek.txt
+
+# Negation. Print every line besides the 3rd line.
+sed -n '3!p' text/geek.txt
 
 # Print lines `3` to `5`.
-sed -n '3,5'p text/geek.txt
+sed -n '3,5p' text/geek.txt
 
 # Print lines starting with `3` and skipping by `2`.
-sed -n '3~2'p text/geek.txt
+sed -n '3~2p' text/geek.txt
 
 # Print the last line.
-sed -n '$'p text/geek.txt
+sed -n '$p' text/geek.txt
 
 # Print lines `2` to the last line.
-sed -n '2,$'p text/geek.txt
+sed -n '2,$p' text/geek.txt
 
 # Print lines matching the pattern until the specified line.
 sed -n '/Sysadmin/,3p' text/geek.txt
@@ -136,7 +139,10 @@ sed -n 's/Linux/Unix/gp' text/geek.txt > text/geek-sub.txt
 sed 's/(/[/g; s/)/]/g' text/geek.txt
 sed -r 's/\((.+)\)/\[\1\]/g' text/geek.txt
 
-# Capture group for substituion.
+# Use & to access the pattern found.
+sed -r 's/[0-9]+/ (&) /g' text/numbers.txt
+
+# Use regex group for capturing additional patterns (up to 9).
 sed 's/\(Linux\).\+/\1/g' text/geek.txt
 sed -r 's/(Linux).+/\1/g' text/geek.txt
 
@@ -183,7 +189,7 @@ sed ':a;s/\B[0-9]\{3\}\>/,&/;ta' text/numbers.txt
 
 
 #-===================================================================
-# APPEND (a), INSERT (i), REPLACE (c)
+# APPEND (a), INSERT (i), CHANGE (c)
 # http://www.thegeekstuff.com/2009/11/unix-sed-tutorial-append-insert-replace-and-count-file-lines/
 #
 # Syntax:
@@ -199,18 +205,40 @@ sed '$a this is the last line' text/geek.txt
 # Insert examples.
 sed '1i this will be inserted before line 1' text/geek.txt
 
-# Replace examples.
+# Change examples, aka replace.
 sed '1c HAS BEEN REPLACED' text/geek.txt
 sed -r '/[wW]indows/c HAS BEEN HAXed' text/geek.txt
+
+
+#-===================================================================
+# TRANSFORM
+#
+# Syntax:
+# sed 'y/abcd/ABCD/' filename
+#-===================================================================
+
+# Converts all lowercase chars to uppercase.
+sed 'y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/' text/geek.txt
+
+# Converts all uppercase chars to lowercase.
+sed 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/' text/geek.txt
+
+# Perform a two character step cipher.
+sed 'y/abcdefghijklmnopqrstuvwxyz/cdefghijklmnopqrstuvwxyzab/' text/geek.txt
 
 
 #-===================================================================
 # MULTI-LINE OPERATIONS
 # http://www.thegeekstuff.com/2009/11/unix-sed-tutorial-multi-line-file-operation-with-6-practical-examples/
 #
-# sed operates line-by-line, so if you need multi-line operations
+# Sed operates line-by-line, so if you need multi-line operations
 # for tasks such as detecting duplicate consecutive lines.
+# It's recommended to write these commands in a shell script.
+#
+# The '-e' flag allows for multiple commands.
 #-===================================================================
+
+sed -r -e 's/etc\.*//g' -e 's/(\s+)(\))/\2/g' text/geek.txt
 
 # Detect duplicate lines and replace the newline with ' @ '.
 # - The curly braces are used to group sed commands.
