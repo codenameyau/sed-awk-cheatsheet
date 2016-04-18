@@ -176,6 +176,9 @@ sed -r 's/\w//g' text/geek.txt
 # Removes html tags.
 sed 's/<[^>]*>//g' text/html.txt
 
+# Remove html tags (intermediate).
+sed -r 's|(</?[a-z]+>)||g' text/html.txt
+
 # Replace value with parenthesis value.
 sed 's/ .\+(\(.\+\))/ \1/g' text/geek.txt
 
@@ -231,20 +234,27 @@ sed 'y/abcdefghijklmnopqrstuvwxyz/cdefghijklmnopqrstuvwxyzab/' text/geek.txt
 # MULTI-LINE OPERATIONS
 # http://www.thegeekstuff.com/2009/11/unix-sed-tutorial-multi-line-file-operation-with-6-practical-examples/
 #
-# Sed operates line-by-line, so if you need multi-line operations
-# for tasks such as detecting duplicate consecutive lines.
-# It's recommended to write these commands in a shell script.
-#
 # The '-e' flag allows for multiple commands.
 #-===================================================================
 
 sed -r -e 's/etc\.*//g' -e 's/(\s+)(\))/\2/g' text/geek.txt
 
-# Detect duplicate lines and replace the newline with ' @ '.
+# Detect consecutive duplicate lines and replace the newline with ' @ '.
 # - The curly braces are used to group sed commands.
 # - Begin by reading the first line and puts it in N.
 # - Then reads the next line separated by a new line (\n) and appends it to N.
 # - Lastly perform the substitution.
-sed -e '{N
-s/\n/ @ /
-}' text/duplicate-geek.txt
+sed -e '{ N; s/\n/ @ /; }' text/duplicate-geek.txt
+
+
+#-===================================================================
+# CONTROL FLOW
+# http://www.thegeekstuff.com/2009/12/unix-sed-tutorial-6-examples-for-sed-branching-operation/
+#
+# Syntax:
+# sed ':label command(s) b label'
+# sed ':label command(s) t label'
+#-===================================================================
+
+# Commatize numbers.
+sed -r ':loop; s/(.*[0-9])([0-9]{3})/\1,\2/; t loop' text/numbers.txt
