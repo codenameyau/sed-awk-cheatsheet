@@ -8,4 +8,4 @@ total_lines=$(wc -l $data_file | awk '{ print $1 }')
 shuf -i 1-$total_lines -n 30 | \
 xargs -i sed -n '{}p' $data_file | \
 awk -F',' '{ print $2 }' | \
-sed 's/"//g'
+sed 's/"//g; s/$/ 123/g'
