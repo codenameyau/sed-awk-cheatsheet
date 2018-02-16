@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# The [[ brackets is a keyword. It is supported in newer versions of bash.
+is_less_than() {
+  if [[ "$1" < "$2" ]]; then
+    echo 1
+  else
+    echo 0
+  fi
+}
+
+is_less_than 1 2
+is_less_than 2 1
+
+
+# This is the postfix and well-supported version of testing.
+# The [ bracket is an operator and a synonym of test.
+# [ "$1" < "$2" ] will fail because < will try to redirect "$2" into "$1"
+is_less_than_postfix() {
+  if [ "$1" -lt "$2" ]; then
+    echo 1
+  else
+    echo 0
+  fi
+}
+
+is_less_than_postfix 1 2
+is_less_than_postfix 2 1
+
+
+# This is equivalent to the example above.
+is_less_than_test() {
+  if test "$1" -lt "$2"; then
+    echo 1
+  else
+    echo 0
+  fi
+}
+
+is_less_than_test 1 2
+is_less_than_test 2 1
+
