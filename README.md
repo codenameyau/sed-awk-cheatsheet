@@ -1,35 +1,9 @@
 # sed-awk
 
-Follow the tutorials here:
-- http://www.thegeekstuff.com/tag/sed-tips-and-tricks/
-- http://www.grymoire.com/Unix/Sed.html
-- http://www.grymoire.com/Unix/Awk.html
-
-Once you've got the skills, it's time to up your game with real-life data found
-in the `/data` folder. May the Tux be with you.
-
-```bash
-# Unzip data.
-unzip data.zip
-
-# Zip data.
-zip -r data.zip data/
-
-# Preview the files.
-head data/names.csv && tail data/names.csv
-
-# Preview csv columns.
-sed -n 1p data/colleges.csv | tr ',' '\n'
-
-# Count the number of lines.
-wc -l data/*
-```
-
-### TLDR
+## TLDR
 
 ```bash
 $ tldr sed
-
   sed
   Run replacements based on regular expressions.
 
@@ -71,9 +45,7 @@ $ tldr awk
     awk '{s+=$1; print $1} END {print "--------"; print s}' filename
 ```
 
---
-
-### Mad Useful Commands
+## Useful Commands
 
 ```bash
 # List out the second column in the table.
@@ -84,6 +56,7 @@ cat text/table.txt | sed 1d | awk '{ sum += $2 } END { print sum }'
 
 # Kills all processes by name.
 ps aux | grep chrome | awk '{ print $2 }' | kill
+pkill chrome
 
 # Deletes trailing whitespace.
 sed 's/\s\+$//g' filename
@@ -102,4 +75,30 @@ for i in {1..20}; do echo $(($RANDOM * 777 * $i)); done | sort -n
 
 # Commatize numbers.
 sed -r ':loop; s/(.*[0-9])([0-9]{3})/\1,\2/; t loop' text/numbers.txt
+```
+
+## Tutorial
+Follow the tutorials here:
+- http://www.thegeekstuff.com/tag/sed-tips-and-tricks/
+- http://www.grymoire.com/Unix/Sed.html
+- http://www.grymoire.com/Unix/Awk.html
+
+Once you've got the skills, it's time to up your game with real-life data found
+in the `/data` folder. May the Tux be with you.
+
+```bash
+# Unzip data.
+unzip data.zip
+
+# Zip data.
+zip -r data.zip data/
+
+# Preview the files.
+head data/names.csv && tail data/names.csv
+
+# Preview csv columns.
+sed -n 1p data/colleges.csv | tr ',' '\n'
+
+# Count the number of lines.
+wc -l data/*
 ```
