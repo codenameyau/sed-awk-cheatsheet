@@ -83,9 +83,6 @@ Follow the tutorials here:
 - http://www.grymoire.com/Unix/Sed.html
 - http://www.grymoire.com/Unix/Awk.html
 
-Once you've got the skills, it's time to up your game with real-life data found
-in the `/data` folder. May the Tux be with you.
-
 ```bash
 # Unzip data.
 unzip data.zip
@@ -184,6 +181,10 @@ sed -r 's/[a-zA-Z]//g' text/geek.txt
 
 # Remove html tags (WIP).
 sed -r 's|(</?[a-z]+>)||g' text/html.txt
+
+# Commatize any number.
+sed ':a;s/\B[0-9]\{3\}\>/,&/;ta' text/numbers.txt
+sed -r ':loop; s/\B[0-9]{3}\>/,&/; t loop' text/numbers.txt
 ```
 
 ### Sed Transform
