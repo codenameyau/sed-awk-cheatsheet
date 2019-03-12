@@ -102,3 +102,107 @@ sed -n 1p data/colleges.csv | tr ',' '\n'
 # Count the number of lines.
 wc -l data/*
 ```
+
+### Sed Print
+
+```sh
+# Print contents of a file.
+sed -n '/fox/p' text/*
+sed -n '/Sysadmin/p' text/geek.txt
+
+# Print lines starting with `3` and skipping by `2`.
+sed -n '3~2p' text/geek.txt
+
+# Print the last line.
+sed -n '$p' text/geek.txt
+
+# Prints the lines matching the between the two patterns.
+sed -n '/Hardware/,/Website/p' text/geek.txt
+```
+
+### Sed Print Line Number
+
+```sh
+# Prints the line number for all lines in the file.
+sed -n '=' filename
+
+# Prints the line number that matches the pattern.
+sed -n '/Linux/=' filename
+
+# Prints the line number in range of two patterns (inclusive).
+sed -n '/Linux/,/Hardware/=' filename
+
+# Prints the total number of lines.
+sed -n '$=' filename
+```
+
+### Sed Delete
+The `d` command performs a deletion.
+
+```sh
+# Deletes the 3rd line from beginning of file.
+sed '3d' text/geek.txt
+
+# Delete every lines starting from 3 and skipping by 2.
+sed '3~2d' text/geek.txt
+
+# Delete lines from 3 to 5.
+sed '3,5d' text/geek.txt
+
+# Delete the last line.
+sed '$d' text/geek.txt
+
+# Delete lines matching the pattern.
+sed '/Sysadmin/d' text/geek.txt
+```
+
+### Sed Substitute
+The `s` command performs a substitution.
+
+```sh
+# Simple substituion for the first result.
+sed 's/Linux/Unix/' text/geek.txt
+
+# Simple substituion for global instances.
+sed 's/Linux/Unix/g' text/geek.txt
+
+# Replace nth instance.
+sed 's/Linux/Unix/2' text/geek.txt
+
+# Write matched lines to output.
+sed -n 's/Linux/Unix/gp' text/geek.txt > text/geek-sub.txt
+
+# Use regex group for capturing additional patterns (up to 9).
+sed 's/\(Linux\).\+/\1/g' text/geek.txt
+sed -r 's/(Linux).+/\1/g' text/geek.txt
+
+# Remove the last word.
+sed -r 's/\d$//g' text/geek.txt
+
+# Remove all letters.
+sed -r 's/[a-zA-Z]//g' text/geek.txt
+
+# Remove html tags (WIP).
+sed -r 's|(</?[a-z]+>)||g' text/html.txt
+```
+
+### Sed Transform
+The `y` command performs a transformation.
+
+```sh
+# Converts all lowercase chars to uppercase.
+sed 'y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/' text/geek.txt
+
+# Converts all uppercase chars to lowercase.
+sed 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/' text/geek.txt
+
+# Perform a two character shift.
+sed 'y/abcdefghijklmnopqrstuvwxyz/cdefghijklmnopqrstuvwxyzab/' text/geek.txt
+```
+
+### Sed Multiple Commands
+The `-e` flag allows for multiple commands.
+
+```sh
+sed -r -e 's/etc\.*//g' -e 's/(\s+)(\))/\2/g' text/geek.txt
+```
